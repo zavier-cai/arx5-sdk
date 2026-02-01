@@ -366,7 +366,7 @@ void Arx5ControllerBase::update_joint_state_()
 {
     // TODO: in the motor documentation, there shouldn't be these torque constants. Torque will go directly into the
     // motors
-    // 标定结果
+    // 标定结果，DMJ4310: 0.96 Nm/A, DMJ4340: 3.86 Nm/A
     const double torque_constant_EC_A4310 = 1.4; // Nm/A
     const double torque_constant_DM_J4310 = 0.5;
     const double torque_constant_DM_J4340 = 1.4;
@@ -554,7 +554,7 @@ void Arx5ControllerBase::send_recv_()
 {
     // TODO: in the motor documentation, there shouldn't be these torque constants. Torque will go directly into the
     // motors
-    // 标定结果
+    // 标定结果，DMJ4310: 0.96 Nm/A, DMJ4340: 3.86 Nm/A
     const double torque_constant_EC_A4310 = 1.4; // Nm/A
     const double torque_constant_DM_J4310 = 0.5;
     const double torque_constant_DM_J4340 = 1.4;

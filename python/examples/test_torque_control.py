@@ -19,11 +19,12 @@ def easeInOutQuad(t):
         t -= 1
         return -(t * (t - 2) - 1) / 2
 
+# joint1会直接旋转
 
 @click.command()
 @click.argument("model")  # ARX arm model: X5 or L5
 @click.argument("interface")  # can bus name (can0 etc.)
-@click.option("--urdf_path", "-u", default="../models/arx5.urdf", help="URDF file path")
+@click.option("--urdf_path", "-u", default="../models/YAM_umi.urdf", help="URDF file path")
 def main(model: str, interface: str, urdf_path: str):
 
     # To initialize robot with different configurations,
@@ -64,7 +65,7 @@ def main(model: str, interface: str, urdf_path: str):
     gain.kp()[:] *= 0.0
     arx5_joint_controller.set_gain(gain) 
     
-    target_joint_poses = np.array([1.0, 2.0, 2.0, 1.5, 1.5, -1.57])
+    target_joint_poses = np.array([1.0, 2.0, 2.0, 1.45, 1.45, -1.4])
 
     step_num = 1500
     try:

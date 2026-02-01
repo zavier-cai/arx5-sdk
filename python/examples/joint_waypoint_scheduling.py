@@ -19,7 +19,7 @@ def main(model: str, interface: str):
     controller.set_log_level(arx5.LogLevel.DEBUG)
     controller.reset_to_home()
     joint_waypoints = np.array(
-        [[1.0, 2.0, 2.0, 1.5, 1.5, -1.57], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+        [[1.0, 2.0, 2.0, 1.45, 1.45, -1.4], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
     )
     waypoint_interval_s = 5.0
 
