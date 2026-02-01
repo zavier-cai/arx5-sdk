@@ -101,9 +101,19 @@
     },
     "python.analysis.extraPaths": [
         "python",
+        "python/arx5_interface.pyi",
     ],
     "cSpell.words": [
         "urdf"
+    ],
+    "ROS2.distro": "humble",
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages",
+        "/opt/openrobots/lib/python3.8/site-packages",
+        "",
+        "/raisim/linux/lib",
+        "/home/cai/Raisim/raisim_build/lib"
     ],
     // "C_Cpp.formatting": "clangFormat"
 }

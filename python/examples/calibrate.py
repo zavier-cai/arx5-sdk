@@ -12,7 +12,7 @@ import arx5_interface as arx5
 @click.command()
 @click.argument("model")  # ARX arm model: X5 or L5
 @click.argument("interface")  # can bus name (can0 etc.)
-@click.argument("joint_id")
+@click.argument("joint_id") # joint_id: 0-5 -> canid: 1245678
 def calibrate_joint(model: str, interface: str, joint_id: int):
     if type(joint_id) == str:
         joint_id = int(joint_id)

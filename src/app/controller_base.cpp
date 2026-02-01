@@ -366,9 +366,10 @@ void Arx5ControllerBase::update_joint_state_()
 {
     // TODO: in the motor documentation, there shouldn't be these torque constants. Torque will go directly into the
     // motors
+    // 标定结果
     const double torque_constant_EC_A4310 = 1.4; // Nm/A
-    const double torque_constant_DM_J4310 = 0.424;
-    const double torque_constant_DM_J4340 = 1.0;
+    const double torque_constant_DM_J4310 = 0.5;
+    const double torque_constant_DM_J4340 = 1.4;
     std::array<OD_Motor_Msg, 10> motor_msg = can_handle_.get_motor_msg();
     std::lock_guard<std::mutex> guard(state_mutex_);
 
@@ -553,9 +554,10 @@ void Arx5ControllerBase::send_recv_()
 {
     // TODO: in the motor documentation, there shouldn't be these torque constants. Torque will go directly into the
     // motors
+    // 标定结果
     const double torque_constant_EC_A4310 = 1.4; // Nm/A
-    const double torque_constant_DM_J4310 = 0.424;
-    const double torque_constant_DM_J4340 = 1.0;
+    const double torque_constant_DM_J4310 = 0.5;
+    const double torque_constant_DM_J4340 = 1.4;
     int start_time_us = get_time_us();
 
     update_output_cmd_();

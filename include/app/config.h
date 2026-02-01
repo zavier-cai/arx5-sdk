@@ -133,6 +133,28 @@ class RobotConfigFactory
             "eef_link",                                                       // eef_link_name
             std::string(SDK_ROOT) + "/models/X5_umi.urdf"                     // urdf_path
         );
+        configurations["YAM_umi"] = std::make_shared<RobotConfig>(
+            "YAM_umi",                                                      // robot_model
+            (VecDoF(6) << -3.14, -0.01, -0.01, -1.6, -1.57, -2).finished(), // joint_pos_min
+            (VecDoF(6) << 2.618, 3.50, 3.20, 1.55, 1.57, 2).finished(),    // joint_pos_max
+            (VecDoF(6) << 5.0, 5.0, 5.5, 5.5, 5.0, 5.0).finished(),        // joint_vel_max，可能需要调整
+            (VecDoF(6) << 30.0, 40.0, 30.0, 15.0, 10.0, 10.0).finished(),  // joint_torque_max
+            (Pose6d() << 0.6, 0.6, 0.6, 1.8, 1.8, 1.8).finished(),         // ee_vel_max
+            0.3,                                                           // gripper_vel_max
+            1.5,                                                           // gripper_torque_max
+            0.08,                                                         // gripper_width, calibrate
+            4.54,                                                          // gripper_open_readout, calibrate
+            6,                                                             // joint_dof
+            std::vector<int>{1, 2, 4, 5, 6, 7},                            // motor_id
+            std::vector<MotorType>{MotorType::DM_J4340, MotorType::DM_J4340, MotorType::DM_J4340, MotorType::DM_J4310,
+                                   MotorType::DM_J4310, MotorType::DM_J4310}, // motor_type
+            8,                                                                // gripper_motor_id
+            MotorType::DM_J4310,                                              // gripper_motor_type
+            (Eigen::Vector3d() << 0, 0, -9.807).finished(),                   // gravity_vector
+            "base_link",                                                      // base_link_name
+            "eef_link",                                                       // eef_link_name
+            std::string(SDK_ROOT) + "/models/YAM_umi.urdf"                     // urdf_path
+        );
         configurations["L5"] = std::make_shared<RobotConfig>(
             "L5",                                                          // robot_model
             (VecDoF(6) << -3.14, -0.05, -0.1, -1.6, -1.57, -2).finished(), // joint_pos_min
@@ -289,7 +311,7 @@ class ControllerConfigFactory
     }
 
   private:
-    ControllerConfigFactory()
+    ControllerConfigFactory() // 默认kp, kd需要调整
     {
         configurations["joint_controller_7"] = std::make_shared<ControllerConfig>(
             "joint_controller",                                                 // controller_type
@@ -305,14 +327,14 @@ class ControllerConfigFactory
             "linear",                                                           // interpolation_method
             0.0                                                                 // default_preview_time
         );
-        configurations["joint_controller_6"] = std::make_shared<ControllerConfig>(
+        configurations["joint_controller_6"] = std::make_shared<ControllerConfig>( // 6dof arm
             "joint_controller",                                           // controller_type
             (VecDoF(6) << 80.0, 70.0, 70.0, 30.0, 30.0, 20.0).finished(), // default_kp
             (VecDoF(6) << 2.0, 2.0, 2.0, 1.0, 1.0, 0.7).finished(),       // default_kd
             5.0,                                                          // default_gripper_kp
             0.2,                                                          // default_gripper_kd
             20,                                                           // over_current_cnt_max
-            0.002,                                                        // controller_dt
+            0.002,                                                        // controller_dt 500Hz
             true,                                                         // gravity_compensation
             true,                                                         // background_send_recv
             true,                                                         // shutdown_to_passive
@@ -333,7 +355,7 @@ class ControllerConfigFactory
             "linear",                                                               // interpolation_method
             0.1                                                                     // default_preview_time
         );
-        configurations["cartesian_controller_6"] = std::make_shared<ControllerConfig>(
+        configurations["cartesian_controller_6"] = std::make_shared<ControllerConfig>( // 6dof arm
             "cartesian_controller",                                           // controller_type
             (VecDoF(6) << 200.0, 200.0, 200.0, 120.0, 80.0, 60.0).finished(), // default_kp
             (VecDoF(6) << 5.0, 5.0, 5.0, 1.0, 1.0, 1.0).finished(),           // default_kd

@@ -25,7 +25,7 @@ def start_keyboard_teleop(controller: Arx5CartesianController):
     target_pose_6d = controller.get_home_pose()
 
     target_gripper_pos = 0.0
-    cmd_dt = 0.01
+    cmd_dt = 0.01 # 100Hz
     preview_time = 0.1
     window_size = 5
     keyboard_queue = Queue(window_size)
@@ -63,6 +63,7 @@ def start_keyboard_teleop(controller: Arx5CartesianController):
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
 
+    # 过滤键盘输入，去除抖动
     def get_filtered_keyboard_output(key_pressed: dict):
         state = np.zeros(6, dtype=np.float64)
         if key_pressed[keyboard.Key.up]:

@@ -32,6 +32,7 @@ def main(model: str, interface: str):
         "joint_controller", robot_config.joint_dof
     )
     # Modify the default configuration here
+    controller_config.gravity_compensation = True # 测试重力补偿
     # controller_config.controller_dt = 0.01 # etc.
 
     USE_MULTITHREADING = True
@@ -59,12 +60,12 @@ def main(model: str, interface: str):
 
     arx5_joint_controller.reset_to_home()
 
-    target_joint_poses = np.array([1.0, 2.0, 2.0, 1.5, 1.5, -1.57])
+    target_joint_poses = np.array([1.0, 2.0, 2.0, 1.45, 1.45, -1.4])
 
     for i in range(step_num):
         cmd = arx5.JointState(robot_config.joint_dof)
         # i = 0
-        cmd.pos()[0:4] = easeInOutQuad(float(i) / step_num) * target_joint_poses[0:4]
+        cmd.pos()[0:5] = easeInOutQuad(float(i) / step_num) * target_joint_poses[0:5]
         cmd.gripper_pos = easeInOutQuad((i / (step_num - 1))) * 0.08
         arx5_joint_controller.set_joint_cmd(cmd)
         if not USE_MULTITHREADING:
@@ -79,8 +80,8 @@ def main(model: str, interface: str):
 
     for i in range(step_num):
         cmd = arx5.JointState(robot_config.joint_dof)
-        cmd.pos()[0:4] = (
-            easeInOutQuad((1 - float(i) / step_num)) * target_joint_poses[0:4]
+        cmd.pos()[0:5] = (
+            easeInOutQuad((1 - float(i) / step_num)) * target_joint_poses[0:5]
         )
         cmd.gripper_pos = easeInOutQuad((1 - i / (step_num - 1))) * 0.08
         arx5_joint_controller.set_joint_cmd(cmd)
