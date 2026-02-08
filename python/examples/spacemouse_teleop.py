@@ -26,8 +26,8 @@ import click
 def start_teleop_recording(controller: Arx5CartesianController):
     """启动 Spacemouse 遥操作控制"""
     
-    ori_speed = 1.5  # 姿态速度增益
-    pos_speed = 0.8  # 位置速度增益
+    ori_speed = 0.5  # 姿态速度增益 1.5
+    pos_speed = 0.3  # 位置速度增益 0.8
     gripper_speed = 0.04  # 夹爪速度增益
     # 对于早期有线版 Spacemouse，松开后读数可能不为零
     # 如果使用无线 3Dconnexion Spacemouse，可以将 deadzone_threshold 设为 0.0 以提高灵敏度
@@ -37,7 +37,7 @@ def start_teleop_recording(controller: Arx5CartesianController):
     target_gripper_pos = 0.0  # 目标夹爪位置
 
     window_size = 3  # 滑动平均窗口大小
-    cmd_dt = 0.01  # 控制周期 (10ms)
+    cmd_dt = 0.01  # 控制周期
     preview_time = 0.05  # 轨迹命令的预览时间（提前量）
 
     UPDATE_TRAJ = True
@@ -171,8 +171,8 @@ def start_teleop_recording(controller: Arx5CartesianController):
 
 
 @click.command()
-@click.argument("model")  # ARX 机械臂型号: X5, L5 等
-@click.argument("interface")  # CAN 总线名称 (can0 等)
+@click.argument("model")  # YAM_umi
+@click.argument("interface")  # can0
 def main(model: str, interface: str):
     
     robot_config = RobotConfigFactory.get_instance().get_config(model)
@@ -182,7 +182,7 @@ def main(model: str, interface: str):
     # controller_config.interpolation_method = "cubic"  # 可选: 三次插值
     controller_config.default_kp = controller_config.default_kp
     
-    # 创建笛卡尔控制器并复位到 home 位置
+    # 创建笛卡尔控制器并复位到零点位置
     controller = Arx5CartesianController(robot_config, controller_config, interface)
     controller.reset_to_home()
 

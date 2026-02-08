@@ -152,8 +152,8 @@ def start_keyboard_teleop(controller: Arx5CartesianController):
 
 
 @click.command()
-@click.argument("model")  # ARX arm model: X5 or L5
-@click.argument("interface")  # can bus name (can0 etc.)
+@click.argument("model")  # YAM_umi
+@click.argument("interface")  # can0
 def main(model: str, interface: str):
     controller = Arx5CartesianController(model, interface)
     controller.reset_to_home()

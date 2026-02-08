@@ -143,7 +143,7 @@ class RobotConfigFactory
             0.3,                                                           // gripper_vel_max
             1.5,                                                           // gripper_torque_max
             0.08,                                                         // gripper_width, calibrate
-            4.54,                                                          // gripper_open_readout, calibrate
+            4.52,                                                          // gripper_open_readout, calibrate
             6,                                                             // joint_dof
             std::vector<int>{1, 2, 4, 5, 6, 7},                            // motor_id
             std::vector<MotorType>{MotorType::DM_J4340, MotorType::DM_J4340, MotorType::DM_J4340, MotorType::DM_J4310,

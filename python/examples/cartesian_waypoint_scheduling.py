@@ -12,8 +12,8 @@ import numpy as np
 
 
 @click.command()
-@click.argument("model")  # ARX arm model: X5 or L5
-@click.argument("interface")  # can bus name (can0 etc.)
+@click.argument("model")  # YAM_umi
+@click.argument("interface")  # can0
 def main(model: str, interface: str):
     controller = arx5.Arx5CartesianController(model, interface)
     np.set_printoptions(precision=4, suppress=True)

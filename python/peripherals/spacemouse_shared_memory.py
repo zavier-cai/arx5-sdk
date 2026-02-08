@@ -20,7 +20,7 @@ class Spacemouse(mp.Process):
         shm_manager,
         get_max_k=30,
         frequency=200,
-        max_value=500,
+        max_value=300, # 有线版推荐 300 无线版推荐 500
         deadzone=(0, 0, 0, 0, 0, 0),
         dtype=np.float32,
         n_buttons=2,

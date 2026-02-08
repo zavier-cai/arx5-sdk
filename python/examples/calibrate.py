@@ -50,8 +50,8 @@ def calibrate_gripper(model: str, interface: str):
 
 
 @click.command()
-@click.argument("model")  # ARX arm model: X5 or L5
-@click.argument("interface")  # can bus name (can0 etc.)
+@click.argument("model")  # YAM_umi
+@click.argument("interface")  # can0
 def check_motor_movements(model: str, interface: str):
     joint_controller_config = arx5.ControllerConfigFactory.get_instance().get_config(
         "joint_controller", 6
@@ -69,7 +69,7 @@ def check_motor_movements(model: str, interface: str):
 
 
 if __name__ == "__main__":
-    check_motor_movements()
+    #check_motor_movements()
     ## To actually calibrate, uncomment one of the following lines
-    # calibrate_joint()
-    # calibrate_gripper()
+    #calibrate_joint()
+    calibrate_gripper()
